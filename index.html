@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rishi Preetham Bitla — Cybersecurity Engineer</title>
+<meta name="description" content="Cybersecurity Engineer · Penetration Tester · Detection Engineer. OSCP in progress." />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Rishi Preetham Bitla — Cybersecurity Engineer" />
+<meta property="og:description" content="Penetration Tester · OSCP in Progress · 50+ Lab Machines Compromised" />
+<meta property="og:image" content="preview.png" />
+<meta property="og:url" content="https://t0beee.github.io/" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Rishi Preetham Bitla — Cybersecurity Engineer" />
+<meta name="twitter:description" content="Penetration Tester · OSCP in Progress" />
+<meta name="twitter:image" content="preview.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0e14;
+    --bg-2: #0f1319;
+    --surface: rgba(240, 180, 41, 0.03);
+    --surface-2: rgba(240, 180, 41, 0.06);
+    --border: rgba(240, 180, 41, 0.12);
+    --border-hover: rgba(240, 180, 41, 0.5);
+    --text: #e8e6e1;
+    --muted: #8b8fa0;
+    --muted-2: #5a5f70;
+    --accent: #f0b429;
+    --accent-2: #e8833a;
+    --accent-3: #ffd166;
+    --warn: #f0b429;
+    --ok: #4ade80;
+    --gradient: linear-gradient(135deg, #ffd166 0%, #f0b429 50%, #e8833a 100%);
+    --gradient-text: linear-gradient(135deg, #ffd166 0%, #f0b429 100%);
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(240, 180, 41, 0.13), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 100% 50%, rgba(232, 131, 58, 0.06), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 0% 80%, rgba(255, 209, 102, 0.04), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(240, 180, 41, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(240, 180, 41, 0.03) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 100% 60% at 50% 0%, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 100% 60% at 50% 0%, black 30%, transparent 80%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .noise {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  main, nav, header, footer, section { position: relative; }
+  nav, header, footer, section { z-index: 1; }
+
+  a { color: var(--accent); text-decoration: none; transition: all 0.25s ease; }
+  a:hover { color: var(--accent-3); }
+
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    width: 0%;
+    background: var(--gradient);
+    z-index: 200;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 10px rgba(240, 180, 41, 0.6);
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: rgba(11, 14, 20, 0.75);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 2rem;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  nav .logo {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text);
+    letter-spacing: 0.02em;
+  }
+  nav .logo .dot-live {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
+    animation: blink 2s infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+  nav .logo span { color: var(--muted); }
+  nav ul { list-style: none; display: flex; gap: 0.5rem; }
+  nav ul a {
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.5rem 0.9rem;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+  nav ul a:hover { color: var(--text); background: var(--surface-2); }
+  @media (max-width: 800px) { nav ul { display: none; } }
+
+  header {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 2rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 0.4rem 0.9rem 0.4rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    width: fit-content;
+    font-family: var(--font-mono);
+    backdrop-filter: blur(10px);
+  }
+  .badge .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--ok);
+    box-shadow: 0 0 8px var(--ok);
+    animation: blink 2s infinite;
+  }
+
+  h1 {
+    font-size: clamp(2.25rem, 6vw, 4.5rem);
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+  }
+  h1 .name {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: block;
+    letter-spacing: 0.01em;
+  }
+  h1 .role {
+    color: var(--muted);
+    font-weight: 300;
+    font-size: 0.55em;
+    display: block;
+    margin-top: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .terminal {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--muted);
+    max-width: 560px;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+    min-height: 3.5rem;
+  }
+  .terminal .line { display: block; }
+  .terminal .prompt-sym { color: var(--accent); }
+  .terminal .cmd { color: var(--text); }
+  .terminal .cursor {
+    display: inline-block;
+    width: 8px;
+    height: 1em;
+    background: var(--accent);
+    vertical-align: text-bottom;
+    margin-left: 2px;
+    animation: blink 1s steps(2) infinite;
+  }
+
+  .subtitle {
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    color: var(--muted);
+    max-width: 640px;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+  .subtitle strong { color: var(--text); font-weight: 500; }
+
+  .cta { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+  .btn {
+    padding: 0.85rem 1.6rem;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid transparent;
+  }
+  .btn.primary {
+    background: var(--gradient);
+    color: #0b0e14;
+    font-weight: 600;
+    box-shadow: 0 8px 24px rgba(240, 180, 41, 0.25);
+  }
+  .btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(240, 180, 41, 0.4);
+    color: #0b0e14;
+  }
+  .btn.ghost {
+    background: var(--surface);
+    border-color: var(--border);
+    color: var(--text);
+    backdrop-filter: blur(10px);
+  }
+  .btn.ghost:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-top: 4rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+    max-width: 720px;
+  }
+  .stat .num {
+    font-family: var(--font-mono);
+    font-size: 1.75rem;
+    font-weight: 600;
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: block;
+    line-height: 1.1;
+  }
+  .stat .label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.25rem;
+    letter-spacing: 0.02em;
+  }
+
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+  }
+  .section-head { margin-bottom: 3rem; }
+  .section-head .label {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-head .label::before {
+    content: "";
+    width: 24px; height: 1px;
+    background: var(--accent);
+    display: inline-block;
+  }
+  h2 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  .about-text { max-width: 780px; }
+  .about-text p {
+    color: var(--muted);
+    font-size: 1.05rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.8;
+  }
+  .about-text strong { color: var(--text); font-weight: 500; }
+
+  .now-box {
+    margin-top: 2rem;
+    padding: 1.5rem 1.75rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 12px;
+    max-width: 780px;
+  }
+  .now-box .label-small {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .now-box ul { list-style: none; padding: 0; }
+  .now-box li {
+    color: var(--text);
+    font-size: 0.95rem;
+    padding-left: 1.5rem;
+    position: relative;
+    margin-bottom: 0.5rem;
+  }
+  .now-box li::before {
+    content: "▸";
+    color: var(--accent);
+    position: absolute;
+    left: 0;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+  .skill-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: var(--gradient);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .skill-card:hover {
+    border-color: var(--border-hover);
+    background: var(--surface-2);
+  }
+  .skill-card:hover::before { opacity: 1; }
+  .skill-card .icon {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 0.75rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+  .skill-card h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+  }
+  .skill-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.65; }
+
+  .item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    margin-bottom: 1.25rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    position: relative;
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+  .item:hover { border-color: var(--border-hover); background: var(--surface-2); }
+  .item-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .item-head h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .item-head .date {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 0.8rem;
+    white-space: nowrap;
+    padding: 0.25rem 0.7rem;
+    background: rgba(240, 180, 41, 0.08);
+    border: 1px solid rgba(240, 180, 41, 0.25);
+    border-radius: 999px;
+  }
+  .item .role {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    font-family: var(--font-mono);
+  }
+  .item ul { list-style: none; padding: 0; }
+  .item ul li {
+    color: var(--muted);
+    font-size: 0.92rem;
+    padding-left: 1.5rem;
+    position: relative;
+    margin-bottom: 0.7rem;
+    line-height: 1.7;
+  }
+  .item ul li::before {
+    content: "▹";
+    color: var(--accent);
+    position: absolute;
+    left: 0;
+    font-size: 0.9rem;
+  }
+
+  .project-actions {
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .project-link {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid rgba(240, 180, 41, 0.3);
+    border-radius: 6px;
+    background: rgba(240, 180, 41, 0.05);
+    transition: all 0.25s ease;
+  }
+  .project-link:hover {
+    background: rgba(240, 180, 41, 0.15);
+    border-color: var(--accent);
+    color: var(--accent-3);
+    transform: translateY(-1px);
+  }
+
+  .tags { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag {
+    background: rgba(232, 131, 58, 0.08);
+    color: var(--accent-2);
+    border: 1px solid rgba(232, 131, 58, 0.25);
+    padding: 0.25rem 0.7rem;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    font-weight: 500;
+  }
+
+  /* Single Medium write-up CTA box */
+  .writeup-cta {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 2.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    color: var(--text);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .writeup-cta::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: var(--gradient);
+    opacity: 0.7;
+  }
+  .writeup-cta:hover {
+    border-color: var(--border-hover);
+    background: var(--surface-2);
+    transform: translateY(-3px);
+    color: var(--text);
+  }
+  .writeup-cta .platform-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .writeup-cta .platform-row .dot-live-sm {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 6px var(--accent);
+    animation: blink 2s infinite;
+  }
+  .writeup-cta h3 {
+    font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    color: var(--text);
+  }
+  .writeup-cta p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+  .writeup-cta .cta-link {
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+  }
+  .writeup-cta:hover .cta-link { color: var(--accent-3); }
+
+  .looking-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+  .looking-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+  }
+  .looking-card:hover {
+    border-color: var(--border-hover);
+    background: var(--surface-2);
+  }
+  .looking-card .label-small {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .looking-card .value {
+    color: var(--text);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    font-weight: 500;
+  }
+
+  .cert-list { display: grid; gap: 0.75rem; }
+  .cert {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.25rem 1.5rem;
+    border-radius: 12px;
+    gap: 1rem;
+    flex-wrap: wrap;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+  .cert:hover { border-color: var(--border-hover); background: var(--surface-2); }
+  .cert .name { color: var(--text); font-size: 0.95rem; font-weight: 500; }
+  .cert .issuer {
+    color: var(--muted);
+    font-size: 0.8rem;
+    display: block;
+    margin-top: 0.15rem;
+    font-family: var(--font-mono);
+  }
+  .cert .date {
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    white-space: nowrap;
+    font-weight: 500;
+  }
+  .cert .date.done { color: var(--ok); background: rgba(74, 222, 128, 0.1); border: 1px solid rgba(74, 222, 128, 0.25); }
+  .cert .date.progress { color: var(--accent); background: rgba(240, 180, 41, 0.1); border: 1px solid rgba(240, 180, 41, 0.3); }
+
+  .contact-intro {
+    color: var(--muted);
+    max-width: 620px;
+    margin-bottom: 2.5rem;
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+  .contact-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    border-radius: 14px;
+    color: var(--text);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-card::after {
+    content: "→";
+    position: absolute;
+    top: 1.25rem; right: 1.25rem;
+    color: var(--muted-2);
+    font-size: 1.1rem;
+    transition: all 0.3s;
+  }
+  .contact-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-3px);
+    background: var(--surface-2);
+    color: var(--text);
+  }
+  .contact-card:hover::after { color: var(--accent); transform: translate(3px, -3px); }
+  .contact-card .icon {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  .contact-card .label {
+    color: var(--muted);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: var(--font-mono);
+  }
+  .contact-card .value {
+    font-size: 0.9rem;
+    font-weight: 500;
+    word-break: break-all;
+  }
+
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--muted-2);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+    font-family: var(--font-mono);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  footer .heart { color: var(--accent); }
+
+  .reveal { opacity: 1; transform: translateY(0); }
+  body.js-ready .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  body.js-ready .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #2a2418; border-radius: 5px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  ::selection { background: rgba(240, 180, 41, 0.3); color: var(--text); }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+<div class="noise"></div>
+
+<nav>
+  <span class="logo">
+    <span class="dot-live"></span>
+    RISHI<span>@PORTFOLIO</span>:~$
+  </span>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#writeups">Write-ups</a></li>
+    <li><a href="#certs">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header>
+  <div class="badge">
+    <span class="dot"></span>
+    Available · Remote &amp; Relocation
+  </div>
+  <h1>
+    <span class="name">RISHI PREETHAM BITLA</span>
+    <span class="role">Cybersecurity Engineer · Penetration Tester</span>
+  </h1>
+
+  <div class="terminal">
+    <span class="line"><span class="prompt-sym">$</span> <span class="cmd" id="typed"></span><span class="cursor"></span></span>
+  </div>
+
+  <p class="subtitle">
+    I find the cracks before attackers do. Specializing in <strong>offensive security</strong>,
+    <strong>vulnerability assessment</strong>, and <strong>detection engineering</strong> —
+    with OSCP in progress and 50+ lab environments compromised.
+  </p>
+  <div class="cta">
+    <a class="btn primary" href="#contact">Get in Touch</a>
+    <a class="btn ghost" href="resume.pdf" download>Download Resume ↓</a>
+    <a class="btn ghost" href="#projects">View My Work</a>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><span class="num">50+</span><div class="label">Lab Machines Pwned</div></div>
+    <div class="stat"><span class="num">3</span><div class="label">Certifications Earned</div></div>
+    <div class="stat"><span class="num">OSCP</span><div class="label">In Progress</div></div>
+  </div>
+</header>
+
+<section id="about" class="reveal">
+  <div class="section-head">
+    <div class="label">01 — About</div>
+    <h2>Who I am</h2>
+  </div>
+  <div class="about-text">
+    <p>
+      Cybersecurity Engineering graduate with <strong>hands-on experience in penetration testing,
+      vulnerability assessment, and security operations</strong>. I've conducted client-facing black-box
+      and grey-box assessments, identifying critical vulnerabilities and high-risk security
+      misconfigurations across web applications and infrastructure.
+    </p>
+    <p>
+      I've built practical defensive security experience through <strong>Wazuh-based SIEM monitoring,
+      detection engineering, and adversary simulation</strong>. Strong foundation in Python, Bash,
+      Linux, web application security, and security tooling — with OSCP currently in progress.
+    </p>
+
+    <div class="now-box">
+      <div class="label-small">◉ Currently</div>
+      <ul>
+        <li>Studying for the OSCP certification</li>
+        <li>Building ReconForge — an automated OSINT &amp; recon framework</li>
+        <li>Publishing technical write-ups on Medium</li>
+        <li>Practicing on OffSec Proving Grounds &amp; HackTheBox</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="reveal">
+  <div class="section-head">
+    <div class="label">02 — Arsenal</div>
+    <h2>Technical Skills</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card tilt">
+      <div class="icon">&gt; offensive</div>
+      <h3>Offensive Security</h3>
+      <p>VAPT, Web Application Security, SQL Injection, LFI, RCE, Privilege Escalation</p>
+    </div>
+    <div class="skill-card tilt">
+      <div class="icon">&gt; tools</div>
+      <h3>Security Tools</h3>
+      <p>Burp Suite Pro, Metasploit, Nmap, Wireshark, Nessus, OpenVAS, Hashcat</p>
+    </div>
+    <div class="skill-card tilt">
+      <div class="icon">&gt; defensive</div>
+      <h3>Defensive Security</h3>
+      <p>Wazuh SIEM, Splunk, Sysmon, Alert Triage, Detection Engineering, MITRE ATT&amp;CK</p>
+    </div>
+    <div class="skill-card tilt">
+      <div class="icon">&gt; code</div>
+      <h3>Languages &amp; Scripting</h3>
+      <p>Python, Bash, PowerShell, SQL</p>
+    </div>
+    <div class="skill-card tilt">
+      <div class="icon">&gt; infra</div>
+      <h3>Infrastructure</h3>
+      <p>Kali Linux, Windows Internals, TCP/IP, AWS Core Services, Docker, Git</p>
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="reveal">
+  <div class="section-head">
+    <div class="label">03 — Experience</div>
+    <h2>Where I've worked</h2>
+  </div>
+
+  <div class="item tilt">
+    <div class="item-head">
+      <h3>Forte WebAsha Technologies Pvt. Ltd.</h3>
+      <span class="date">Jan 2026 – Jun 2026</span>
+    </div>
+    <div class="role">Cybersecurity Intern · Pune, India</div>
+    <ul>
+      <li>Conducted black-box and grey-box penetration tests across client-provisioned web applications, identifying and validating vulnerabilities ranging from Critical to Medium severity, including RCE, SQL Injection, and XSS.</li>
+      <li>Identified high-risk security weaknesses including outdated CMS/plugin versions, exposed Telnet services with default credentials, IDOR vulnerabilities, plaintext credentials over FTP, and excessive permissions on password hash files.</li>
+      <li>Performed vulnerability exploitation and post-exploitation activities to validate impact, including privilege escalation and administrative access on vulnerable systems.</li>
+      <li>Authored technical security reports documenting exploitation methodology, evidence, risk impact, and actionable remediation recommendations.</li>
+    </ul>
+    <div class="tags">
+      <span class="tag">penetration-testing</span>
+      <span class="tag">burp-suite</span>
+      <span class="tag">metasploit</span>
+      <span class="tag">report-writing</span>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="reveal">
+  <div class="section-head">
+    <div class="label">04 — Projects</div>
+    <h2>Technical Work &amp; Labs</h2>
+  </div>
+
+  <div class="item tilt">
+    <div class="item-head">
+      <h3>SOC Home Lab — Wazuh + Sysmon Detection Engineering</h3>
+      <span class="date">Aug 2026</span>
+    </div>
+    <div class="role">Wazuh · Sysmon · MITRE ATT&amp;CK</div>
+    <ul>
+      <li>Deployed a full Wazuh SIEM stack (manager, indexer, dashboard) from scratch on Kali Linux, with a Windows 10 endpoint forwarding Sysmon telemetry over an encrypted channel.</li>
+      <li>Wrote 3 custom detection rules mapped to MITRE ATT&amp;CK techniques (T1059.001, T1087, T1033), each verified against a real simulated execution — not copy-pasted from defaults.</li>
+      <li>Documented every real failure hit during setup (silent install failures, rule field-name mismatches, agent reconnect timing) as the actual skill being demonstrated.</li>
+    </ul>
+    <div class="tags">
+      <span class="tag">wazuh</span>
+      <span class="tag">sysmon</span>
+      <span class="tag">detection-engineering</span>
+      <span class="tag">mitre-attack</span>
+    </div>
+    <div class="project-actions">
+      <a class="project-link" href="https://github.com/t0beee/soc-home-lab" target="_blank" rel="noopener">View on GitHub ↗</a>
+    </div>
+  </div>
+
+  <div class="item tilt">
+    <div class="item-head">
+      <h3>OffSec Proving Grounds — 50+ Targets</h3>
+      <span class="date">Apr 2026 – Jun 2026</span>
+    </div>
+    <div class="role">Linux &amp; Windows Exploitation</div>
+    <ul>
+      <li>Compromised and escalated privileges across 50+ Linux and Windows lab environments through structured reconnaissance, enumeration, exploitation, and post-exploitation workflows.</li>
+      <li>Applied manual exploitation techniques involving misconfigured SUID binaries, service vulnerabilities, credential weaknesses, and Active Directory enumeration.</li>
+      <li>Documented attack paths, reconnaissance findings, exploitation techniques, and remediation considerations through technical write-ups published on Medium.</li>
+    </ul>
+    <div class="tags">
+      <span class="tag">privilege-escalation</span>
+      <span class="tag">active-directory</span>
+      <span class="tag">linux</span>
+      <span class="tag">windows</span>
+    </div>
+    <div class="project-actions">
+      <a class="project-link" href="https://medium.com/@tobi03288" target="_blank" rel="noopener">Read Write-ups ↗</a>
+    </div>
+  </div>
+
+  <div class="item tilt">
+    <div class="item-head">
+      <h3>ReconForge v1.0 — Intelligent Attack Surface Mapper</h3>
+      <span class="date">Jul 2026</span>
+    </div>
+    <div class="role">Python · Bash · APIs</div>
+    <ul>
+      <li>Built a modular CLI recon framework in Python that runs subdomain enumeration, port scanning, WAF detection, SSL inspection, WordPress deep scan, directory bruteforce, and more — one command → full attack surface map.</li>
+      <li>Integrated AI-powered attack vector prioritization (Claude API) and automated dual reporting (TXT + HTML dark-theme visual report).</li>
+      <li>Implemented historical diffing so each scan shows what changed since the last — enabling fast detection of new exposure on a target.</li>
+    </ul>
+    <div class="tags">
+      <span class="tag">python</span>
+      <span class="tag">automation</span>
+      <span class="tag">osint</span>
+      <span class="tag">recon</span>
+    </div>
+    <div class="project-actions">
+      <a class="project-link" href="https://github.com/t0beee/ReconForge" target="_blank" rel="noopener">View on GitHub ↗</a>
+    </div>
+  </div>
+</section>
+
+<section id="writeups" class="reveal">
+  <div class="section-head">
+    <div class="label">05 — Write-ups</div>
+    <h2>Latest Write-ups</h2>
+  </div>
+  <a class="writeup-cta" href="https://medium.com/@tobi03288" target="_blank" rel="noopener">
+    <div class="platform-row">
+      <span class="dot-live-sm"></span>
+      Medium · Technical Write-ups
+    </div>
+    <h3>Box walkthroughs, CVE breakdowns, and exploitation techniques.</h3>
+    <p>
+      I document every box, misconfiguration, and technique I explore — from OffSec Proving Grounds
+      privesc chains to Active Directory enumeration and web app exploitation walkthroughs. Full
+      archive lives on Medium.
+    </p>
+    <span class="cta-link">Visit medium.com/@tobi03288 →</span>
+  </a>
+</section>
+
+<section id="looking" class="reveal">
+  <div class="section-head">
+    <div class="label">06 — Open To</div>
+    <h2>What I'm looking for</h2>
+  </div>
+  <div class="looking-grid">
+    <div class="looking-card">
+      <div class="label-small">Roles</div>
+      <div class="value">Penetration Tester · SOC Analyst · Security Engineer · Red Team</div>
+    </div>
+    <div class="looking-card">
+      <div class="label-small">Type</div>
+      <div class="value">Full-time · Internship · Contract</div>
+    </div>
+    <div class="looking-card">
+      <div class="label-small">Location</div>
+      <div class="value">Remote · Open to Relocation Globally</div>
+    </div>
+    <div class="looking-card">
+      <div class="label-small">Availability</div>
+      <div class="value">Immediate · Graduated June 2026</div>
+    </div>
+  </div>
+</section>
+
+<section id="certs" class="reveal">
+  <div class="section-head">
+    <div class="label">07 — Credentials</div>
+    <h2>Certifications</h2>
+  </div>
+  <div class="cert-list">
+    <div class="cert">
+      <div>
+        <span class="name">OSCP — Offensive Security Certified Professional</span>
+        <span class="issuer">Offensive Security</span>
+      </div>
+      <span class="date progress">In Progress</span>
+    </div>
+    <div class="cert">
+      <div>
+        <span class="name">Cisco Certified Support Technician: Ethical Hacker</span>
+        <span class="issuer">Cisco Networking Academy</span>
+      </div>
+      <span class="date done">Nov 2025</span>
+    </div>
+    <div class="cert">
+      <div>
+        <span class="name">Cisco Certified Support Technician: Endpoint Security</span>
+        <span class="issuer">Cisco Networking Academy</span>
+      </div>
+      <span class="date done">Dec 2024</span>
+    </div>
+    <div class="cert">
+      <div>
+        <span class="name">AWS Academy Graduate — Cloud Foundations</span>
+        <span class="issuer">Amazon Web Services</span>
+      </div>
+      <span class="date done">Oct 2024</span>
+    </div>
+  </div>
+</section>
+
+<section id="education" class="reveal">
+  <div class="section-head">
+    <div class="label">08 — Education</div>
+    <h2>Academic Background</h2>
+  </div>
+  <div class="item">
+    <div class="item-head">
+      <h3>SR University</h3>
+      <span class="date">Sep 2022 – Jun 2026</span>
+    </div>
+    <div class="role">B.Tech · Computer Science — Cyber Security Specialization · Telangana, India</div>
+  </div>
+</section>
+
+<section id="contact" class="reveal">
+  <div class="section-head">
+    <div class="label">09 — Contact</div>
+    <h2>Let's connect</h2>
+  </div>
+  <p class="contact-intro">
+    Open to cybersecurity roles, penetration testing engagements, and security research collaborations.
+    The fastest way to reach me is email — I usually respond within 24 hours.
+  </p>
+  <div class="contact-grid">
+    <a class="contact-card" href="mailto:rishipreetham1991@gmail.com">
+      <span class="icon">&gt;_</span>
+      <span class="label">Email</span>
+      <span class="value">rishipreetham1991@gmail.com</span>
+    </a>
+    <a class="contact-card" href="https://www.linkedin.com/in/rishi-preetham-a09148254" target="_blank" rel="noopener">
+      <span class="icon">&gt;_</span>
+      <span class="label">LinkedIn</span>
+      <span class="value">rishi-preetham</span>
+    </a>
+    <a class="contact-card" href="https://github.com/t0beee" target="_blank" rel="noopener">
+      <span class="icon">&gt;_</span>
+      <span class="label">GitHub</span>
+      <span class="value">@t0beee</span>
+    </a>
+    <a class="contact-card" href="https://medium.com/@tobi03288" target="_blank" rel="noopener">
+      <span class="icon">&gt;_</span>
+      <span class="label">Medium</span>
+      <span class="value">@tobi03288</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>Crafted by Rishi <span class="heart">◆</span> 2026</p>
+</footer>
+
+<script>
+  document.body.classList.add('js-ready');
+
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = pct + '%';
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav ul a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      if (window.scrollY >= section.offsetTop - 200) current = section.id;
+    });
+    navLinks.forEach(link => {
+      link.style.color = link.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+    });
+  });
+
+  const commands = [
+    "whoami",
+    "cat role.txt",
+    "ls certifications/",
+    "nmap -sV target.local"
+  ];
+  const outputs = [
+    "> rishi preetham bitla",
+    "> cybersecurity engineer · penetration tester",
+    "> cisco-eh.crt  cisco-eps.crt  aws-cloud.crt  oscp.in-progress",
+    "> 22/tcp open  ssh     |  80/tcp open  http    |  443/tcp open  https"
+  ];
+  const typedEl = document.getElementById('typed');
+  let cmdIdx = 0;
+  let charIdx = 0;
+  let showingOutput = false;
+
+  function typeLoop() {
+    const current = showingOutput ? outputs[cmdIdx] : commands[cmdIdx];
+    if (!showingOutput) {
+      typedEl.textContent = current.slice(0, charIdx + 1);
+      typedEl.style.color = 'var(--text)';
+      charIdx++;
+      if (charIdx >= current.length) {
+        showingOutput = true;
+        charIdx = 0;
+        setTimeout(typeLoop, 800);
+        return;
+      }
+      setTimeout(typeLoop, 70);
+    } else {
+      typedEl.textContent = current.slice(0, charIdx + 1);
+      typedEl.style.color = 'var(--accent)';
+      charIdx++;
+      if (charIdx >= current.length) {
+        showingOutput = false;
+        charIdx = 0;
+        cmdIdx = (cmdIdx + 1) % commands.length;
+        setTimeout(typeLoop, 2000);
+        return;
+      }
+      setTimeout(typeLoop, 40);
+    }
+  }
+  setTimeout(typeLoop, 800);
+
+  document.querySelectorAll('.tilt').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const cx = rect.width / 2;
+      const cy = rect.height / 2;
+      const rotX = ((y - cy) / cy) * -3;
+      const rotY = ((x - cx) / cx) * 3;
+      card.style.transform = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-3px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+</script>
+
+</body>
+</html>
